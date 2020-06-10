@@ -1,6 +1,7 @@
 ---
 title: "Hello world"
-output: html_document
+date: "2020-06-10"
+output: github_document
 ---
 
 ```{r setup, include=FALSE}
