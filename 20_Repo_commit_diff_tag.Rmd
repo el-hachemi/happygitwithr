@@ -2,7 +2,8 @@
 title: "20 Repo, commit, diff, tag"
 author: "Boukara Ahmed El-Hachemi"
 date: "04/07/2020"
-output: html_document
+output: 
+  github_document
 ---
 
 ## 1 Repos or repositories
