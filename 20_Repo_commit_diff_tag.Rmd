@@ -1,0 +1,32 @@
+---
+title: "20 Repo, commit, diff, tag"
+author: "Boukara Ahmed El-Hachemi"
+date: "04/07/2020"
+output: html_document
+---
+
+## 1 Repos or repositories
+
+Git is a version control system whose original purpose was to help groups of developers work collaboratively on big software projects. Git manages the evolution of a set of files – called a repository or repo – in a highly structured way.    
+
+We use it to manage the motley collection of files that make up typical data analytical projects, which consist of data, figures, reports, and, yes, some source code.   
+
+For new or existing projects, we recommand that you:  
+
+* Dedicate a local directory or folder to it.
+* Make it an RStudio Project. *Optional but recommended; obviously only applies to projects involving R and users of RStudio*.
+* Make it a Git repository.   
+
+The daily workflow is probably not dramatically different from what you do currently. But instead of only saving individual files, periodically you make a **commit**, which takes a snapshot of all the files in the entire project. It is a version that is significant to you and that you might want to inspect or revert to later. Periodically, you push commits to GitHub. By pushing to GitHub, you make your work and all your accumulated progress accessible to others.  
+
+## 2 Commits, diffs, and tags  
+
+Consider version A of `iris.R` and a modified version, version B. Assume that version A was part of one Git commit and version B was part of the next commit. The set of differences between A and B is called a “diff” and Git users contemplate diffs a lot. Diff inspection is how you re-explain to yourself how version A differs from version B. Diff inspection is not limited to adjacent commits. You can inspect the diffs between any two commits.    
+
+In fact, Git’s notion of any specific version of `iris.R` is as an accumulation of diffs.  
+
+So, by looking at diffs, it’s easy to see how two snapshots differ, but what about the why?  
+
+Every time you make a commit you must also write a short **commit message**. Ideally, this conveys the motivation for the change. When you revisit a project after a break or need to digest recent changes made by a colleague, looking at the **history**, by reading commit messages and skimming through diffs, is an extremely efficient way to get up to speed.  
+
+Every commit needs some sort of nickname, so you can identify it. Git does this automatically, assigning each commit what is called a SHA, a seemingly random string of 40 letters and numbers (it is not, in fact, random but is a SHA-1 checksum hash of the commit). Though you will be exposed to these, you don’t have to handle them directly very often and, when you do, usually the first 7 characters suffice. You can also designate certain snapshots as special with a tag, which is a name of your choosing. In a software project, it is typical to tag a release with its version, e.g., “v1.0.3”. For a manuscript or analytical project, you might tag the version submitted to a journal or transmitted to external collaborators.
