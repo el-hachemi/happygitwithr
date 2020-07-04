@@ -91,13 +91,83 @@ git commit --amend -m "Implement awesome feature; closes #43"
 git push
 ```
 
-Your history – and that on GitHub – look like this:
+Your history – and that on GitHub – look like this:  
 
 ```{bash}
 A -- B -- C -- D
 ```
 
-As far as the world knows, you implemented the feature in one fell swoop. But you got to work on the task incrementally, with the peace of mind that you could never truly break things.
+As far as the world knows, you implemented the feature in one fell swoop. But you got to work on the task incrementally, with the peace of mind that you could never truly break things.   
 
+## 3 What if I need to fall back?  
 
+Imagine you’re in the middle of a Repeated Amend workflow:  
+
+```{bash}
+A -- B -- C -- WIP*
+```
+
+and you make some changes that break your project, e.g. tests start failing. These bad changes are not yet committed, but they are saved. You want to fall back to the last good state, represented by WIP*.   
+
+In Git lingo, you want to do a hard reset to the WIP* state. With the command line:  
+
+```{bash hard_reset, eval=FALSE}
+git reset --hard
+```
+
+which is implicitly the same as  
+
+```{bash hard_reset_2, eval=FALSE}
+git reset --hard HEAD
+```
+
+which says: “reset my files to their state at the most recent commit”.   
+
+This is also possible in RStudio. Click on “Diff” or “Commit”. Select a file with changes you do not want. Use “Discard All” to discard all changes in that file. Use “Discard chunk” to discard changes in that file, selectively. Repeat this procedure for each affected file until you are back to an acceptable state. Carry on.   
+
+## 4 Why don’t we push intermediate progress?
+
+Amending a commit is an example of what’s called “rewriting Git history”.   
+
+Rewriting history that has already been pushed to GitHub – and therefore potentially pulled by someone else – is a controversial practice. Like most controversial practices, lots of people still indulge in it, as do I.   
+
+But there is the very real possibility that you create headaches for yourself and others, so in Happy Git we must recommend that you abstain. Once you’ve pushed something, consider it written in stone and move on.   
+
+## 5 Um, what if I did push?
+
+I told you not to!  
+
+But OK here we are.  
+
+Let’s imagine you pushed this state to GitHub by mistake:  
+
+```{bash scenario_t1, eval=FALSE}
+A -- B -- C -- WIP (85bf30a)
+```
+
+and proceeded to git commit --amend again locally, leading to this state:   
+
+```{bash scenario_t2, eval=FALSE }
+A -- B -- C -- WIP* (6e884e6)
+```
+
+I’m deliberately showing two histories that sort of look the same, in terms of commit messages. But the last SHA reveals they are actually different.  
+
+You are in a pickle now, as you can’t do a simple push or pull. A push will be rejected and a pull will probably lead to a merge that you don’t want.  
+
+You have two choices:  
+
+* Hard reset your local repo to `C` (`git reset --hard HEAD^`) and pull from GitHub. Do this if you have collaborators who may have pulled that state. GitHub and local history now show this:  
+
+```{bash}
+A -- B -- C -- WIP (85bf30a)
+```
+
+* Force push to GitHub (`git push --force`). Do this if you have no collaborators or you have reason to believe they have not pulled. GitHub and local history now show this:
+
+```{bash}
+A -- B -- C -- WIP* (6e884e6)
+```
+
+Now you are synced up again. 
 
