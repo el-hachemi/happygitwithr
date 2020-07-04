@@ -1,0 +1,24 @@
+---
+title: "24 Common remote setups"
+author: "Boukara Ahmed El-Hachemi"
+date: "04/07/2020"
+output: 
+  github_document: default
+---
+
+We only consider a very constrained set of remotes here:
+
+* The remote is on GitHub, e.g. its URL looks something like `https://github.com/OWNER/REPO.git` or `git@github.com:OWNER/REPO.git`.  
+* The remote is named `origin` or `upstream`. These may not be the most evocative names in the world, but they are the most common choices.  
+
+If you use a different host or different remote names, you should still be able to translate these examples to your setting.   
+
+Along the way we note how these setups relate to the usethis package, i.e. how usethis can help you get into a favorable setup or how a favorable setup unlocks the full power of usethis. Many of these operations require that you have configured a GitHub personal access token. If you don’t use usethis, feel free to ignore these asides. *2020-06 note: this currently refers to features in a development version of usethis. These features are not in v1.6.1 = the current CRAN version.*
+
+## 1 No Github
+
+
+
+
+
+
