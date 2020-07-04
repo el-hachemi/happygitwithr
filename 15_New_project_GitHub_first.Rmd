@@ -33,13 +33,13 @@ Completely optional activity: use command line Git to see what we’re talking a
 
 `git remote -v` or `git remote --verbose` shows the remotes you have setup.   
 
-```{bash}
+```{bash, eval=FALSE}
 git remote -v
 ```
 
 `git branch -vv` prints info about the current branch. In particular, we can see that local `master` is tracking the `master` branch on `origin`, a.k.a. `origin/master`.   
 
-```{bash}
+```{bash, eval=FALSE}
 git branch -vv
 ```
 
