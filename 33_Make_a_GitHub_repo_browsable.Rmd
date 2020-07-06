@@ -1,0 +1,161 @@
+---
+title: "33 Make a GitHub repo browsable"
+author: "Boukara Ahmed El-Hachemi"
+date: "06/07/2020"
+output: 
+  github_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+```
+
+## 1 Be savvy about your files
+
+Keep files in the plainest, web-friendliest form that is compatible with your main goals. Plain text is the very best. GitHub offers special handling for certain types of files:  
+
+* Markdown files, which may be destined for conversion into, e.g., HTML  
+* Markdown files named README.md 
+* HTML files, often the result of compiling Markdown files
+* Source code, such as .R files
+* Delimited files, such as CSVs and TSVs
+* PNG files
+
+## 2 Get over your hang ups re: committing derived products
+
+## 3 Markdown
+
+You will quickly discover that GitHub renders Markdown files very nicely. By clicking on foo.md, you’ll get a decent preview of foo.html. Yay! You should read GitHub’s own guide on how to leverage automatic Markdown rendering.  
+
+Exploit this aggressively. Make Markdown your default format for narrative text files and use them liberally to embed notes to yourself and others in a repository hosted on Github. It’s an easy way to get pseudo-webpages inside a project “for free”. You may never even compile these files to HTML explicitly; in many cases, the HTML preview offered by GitHub is all you ever need.  
+
+## 4 R Markdown
+
+If your target output format is not Markdown, you want YAML frontmatter that looks something like this for .Rmd:  
+
+```{bash}
+---
+title: "Something fascinating"
+author: "Jenny Bryan"
+date: "`r format(Sys.Date())`"
+output:
+  html_document:
+    keep_md: TRUE
+---
+```
+
+or like this for .R:  
+
+```{bash}
+#' ---
+#' title: "Something fascinating"
+#' author: "Jenny Bryan"
+#' date: "`r format(Sys.Date())`"
+#' output:
+#'   html_document:
+#'     keep_md: TRUE
+#' ---
+```
+
+If Markdown is your target output format, your YAML can be even simpler and look like this for .Rmd:  
+
+```{bash}
+---
+output: github_document
+---
+```
+
+or like this for .R:
+
+```{bash}
+#' ---
+#' output: github_document
+#' ---
+```
+
+For a quick, stand-alone document that doesn’t fit neatly into a repository or project (yet), make it a [Gist](https://gist.github.com/). Example: Hadley Wickham’s [advice on what you need to do to become a data scientist](https://gist.github.com/hadley/820f09ded347c62c2864). Gists can contain multiple files, so you can still provide the R script or R Markdown source and the resulting Markdown, as I’ve done in this write-up of [Twitter-sourced tips for cross-tabulation](https://gist.github.com/jennybc/04b71bfaaf0f88d9d2eb). I’ve collected [YAML examples](https://gist.github.com/jennybc/402761e30b9be8023af9) for all the above scenarios in a gist.  
+
+## 5 `README.md`
+
+for any logical group of files or mini project-within-your-project, create a sub-directory in your repository. And then create a `README.md` file to annotate these files, collect relevant links, etc. Now when you navigate to the sub-directory on GitHub the nicely rendered `README.md` will simply appear.   
+
+Some repositories consist solely of `README.md`. Examples: Jeff Leek’s write-ups on [How to share data with a statistician](https://github.com/jtleek/datasharing) or [Developing R packages](https://github.com/jtleek/rpackages). I am becoming a bigger fan of README-only repos than gists because repo issues trigger notifications, whereas comments on gists do not.   
+
+If you’ve got a directory full of web-friendly figures, such as PNGs, you can use [code like this](https://gist.github.com/jennybc/0239f65633e09df7e5f4) to generate a README.md for a quick DIY gallery, as Karl Broman has done with [his FruitSnacks](https://github.com/kbroman/FruitSnacks/blob/master/PhotoGallery.md). I did same for all the [fantastic O RLY book covers](https://github.com/jennybc/orly-full-res#readme) made by The Practical Dev.    
+
+I have also used this device to share Keynote slides on GitHub (mea culpa!). Export them as PNGs images and throw ’em into a README gallery: slides on [file organization](https://github.com/Reproducible-Science-Curriculum/rr-organization1/tree/27883c8fc4cdd4dcc6a8232f1fe5c726e96708a0/slides/organization-slides) and some on [file naming](https://github.com/Reproducible-Science-Curriculum/rr-organization1/tree/27883c8fc4cdd4dcc6a8232f1fe5c726e96708a0/slides/naming-slides).   
+
+## 6 Finding stuff
+
+OK these are pure GitHub tips but if you’ve made it this far, you’re obviously a keener.   
+
+* Press `t` to activate [the file finder](https://github.com/blog/793-introducing-the-file-finder) whenever you’re in a repo’s file and directory view. AWESOME, especially when there are files tucked into lots of subdirectories.    
+* Press `y` to [get a permanent link](https://help.github.com/articles/getting-permanent-links-to-files/) when you’re viewing a specific file. Watch what changes in the URL. This is important if you are about to link to a file or [to specific lines](http://stackoverflow.com/questions/23821235/how-to-link-to-specific-line-number-on-github). Otherwise your links will break easily in the future. If the file is deleted or renamed or if lines get inserted or deleted, your links will no longer point to what you intended. Use `y` to get links that include a specific commit in the URL.    
+
+## 7 HTML
+
+If you have an HTML file in a GitHub repository, simply visiting the file shows the raw HTML. Here’s a nice ugly example:  
+
+* [https://github.com/STAT545-UBC/STAT545-UBC.github.io/blob/master/bit003_api-key-env-var.html](https://github.com/STAT545-UBC/STAT545-UBC.github.io/blob/master/bit003_api-key-env-var.html)    
+
+*RawGit announced that it is in a sunset phase and will soon shut down. They recommended: [jsDelivr](https://www.jsdelivr.com/rawgit), [GitHub Pages](https://pages.github.com/), [CodeSandbox](https://codesandbox.io/), and [unpkg](https://unpkg.com/#/) as alternatives.*
+
+This sort of enhanced link might be one of the useful things to put in a README.md or other Markdown file in the repo.  
+
+You may also want to check out this [Chrome extension](https://chrome.google.com/webstore/detail/github-html-preview/cphnnfjainnhgejcpgboeeakfkgbkfek?hl=en) or [GitHub & BitBucket HTML Preview](https://htmlpreview.github.io/), though recently I’ve more success with rawgit.com.   
+
+Sometimes including HTML files will cause GitHub to think that your R repository is HTML. Besides being slightly annoying, this can make it difficult for people to find your work if they are searching specifically for R repos. You can exclude these files or directories from GitHub’s language statistics by [adding a .gitattributes file](https://github.com/github/linguist#using-gitattributes) that marks them as ‘documentation’ rather than code. [See an example here](https://github.com/jennybc/googlesheets/blob/master/.gitattributes).   
+
+## 8 Source code
+
+You will notice that GitHub does automatic syntax highlighting for source code. For example, notice the coloring of this [R script](https://github.com/jennybc/ggplot2-tutorial/blob/master/gapminder-ggplot2-stripplot.r). The file’s extension is the primary determinant for if/how syntax highlighting will be applied. You can see information on recognized languages, the default extensions and more at [github/linguist](https://github.com/github/linguist/blob/master/lib/linguist/languages.yml). You should be doing it anyway, but let this be another reason to follow convention in your use of file extensions.  
+
+Note you can click on “Raw” in this context as well, to get just the plain text and nothing but the plain text.  
+
+## 9 Delimited files
+
+GitHub will nicely render tabular data in the form of .csv (comma-separated) and .tsv (tab-separated) files. You can read more in the [blog post](https://github.com/blog/1601-see-your-csvs) announcing this feature in August 2013 or in this [GitHub help page](https://help.github.com/articles/rendering-csv-and-tsv-data).      
+
+Advice: take advantage of this! If something in your repo can be naturally stored as delimited data, by all means, do so. Make the comma or tab your default delimiter and use the file suffixes GitHub is expecting. I have noticed that GitHub is more easily confused than R about things like quoting, so always inspect the GitHub-rendered .csv or .tsv file in the browser. You may need to do light cleaning to get the automagic rendering to work properly. Think of it as yet another way to learn about imperfections in your data.    
+
+Here’s an example of a tab delimited file on GitHub: [lotr_clean.tsv](https://github.com/jennybc/lotr/blob/master/lotr_clean.tsv), originally found here (nope, IBM shut down manyeyes July 2015).      
+
+Note you can click on “Raw” in this context as well, to get just the plain text and nothing but the plain text.      
+
+## 10 PNGs
+
+~~PNG is the “no brainer” format in which to store figures for the web. But many of us like a vector-based format, such as PDF, for general purpose figures. Bottom line: PNGs will drive you less crazy than PDFs on GitHub. To reduce the aggravation around viewing figures in the browser, make sure to have a PNG version in the repo.~~   
+
+## 11 Other document formats
+
+You may also have a document you want others to be able to browse and interact with, but it is not in the markdown format. Fortunately, the open-source Pandoc program, written by John MacFarlane, allows you to convert a range of formats into markdown, including the widely used `.docx` format.     
+
+When you click the Knit button in RStudio it is actually Pandoc which performs the final conversion to HTML or Microsoft Word (`.docx`) formats. If you are willing to use the command-line, you can perform the opposite conversion (eg `.docx` to `.md`), commonly retaining features such as headings, tables, equations and even figures.    
+
+As some boilerplate, running in Windows PowerShell `pandoc --extract-media .\media -f docx .\example.docx -t markdown_github -o example_image.md` converts a word document called `example.docx` to markdown, and extracts the images into a directory which corresponds to a filepath in the newly created `example.md` document. A full list of supported formats and example code for conversions are available at [https://pandoc.org/](https://pandoc.org/).    
+
+You can also perform simple conversions to GitHub-flavored markdown from different markdown flavours (Pandoc supports `markdown_mmd`, `markdown_php_extra` and `markdown_strict`) from within RStudio. To do so you need to rename the file by changing the extension (eg from `foo.md` to `foo.Rmd`), then open the renamed file in RStudio and add the following text to the top of the document.    
+
+```{bash}
+---
+output: github_document
+---
+```
+
+You can then click on “Knit” then “Knit to github document” to perform the conversion. See Output format for more details of controlling output formats with the YAML frontmatter.   
+
+## 12 Linking to a ZIP archive of your repo
+
+If you add `/archive/master.zip` to the end of the URL for your repo, you construct a link that will download a ZIP archive of your repository. Click here to try this out on a very small repo:    
+
+[https://github.com/jennybc/lotr/archive/master.zip](https://github.com/jennybc/lotr/archive/master.zip)     
+
+## 13 Links and embedded figures
+
+* To link to another page in your repo, just use a relative link: `[admin](courseAdmin/)` will link to the `courseAdmin/` directory inside the current directory. `[admin](/courseAdmin/)` will link to the top-level `courseAdmin/` directory from any where in the repo   
+
+* The same idea also works for images. `![](image.png)` will include `image.png` located in the current directory    
+
+## 14 Let people correct you on the internet
+
+You can create a link that takes people directly to an editing interface in the browser.  
