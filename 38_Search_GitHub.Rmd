@@ -1,0 +1,51 @@
+---
+title: "38 Search GitHub"
+author: "Boukara Ahmed El-Hachemi"
+date: "07/07/2020"
+output: 
+  github_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+```
+
+## 1 Basic resources
+
+
+GitHub searching
+
+* [https://github.com/search/advanced](https://github.com/search/advanced)
+* [https://help.github.com/articles/searching-code/](https://help.github.com/articles/searching-code/)
+* [https://help.github.com/articles/search-syntax/](https://help.github.com/articles/search-syntax/)
+
+Read-only mirror of R source by Winston Chang:
+
+* [https://github.com/wch/r-source](https://github.com/wch/r-source)    
+
+Read-only mirror of all packages on CRAN by Gábor Csárdi:
+
+* [https://github.com/cran](https://github.com/cran)
+* [http://cran.github.io](http://cran.github.io/)
+* [METACRAN](http://www.r-pkg.org/)  
+
+## 2 Use case
+
+
+What if a function in a package has no examples? Or is poorly exampled? Wouldn’t it be nice to find functioning instances of it “in the wild”?  
+
+Via Twitter, Noam Ross taught me a clever way to do such searches on GitHub. Put this into the GitHub search box to see how packages on CRAN use the `llply()` function from `plyr`:
+
+```{bash}
+"llply" user:cran language:R
+```
+
+Or just [click here](https://github.com/search?l=r&q=%22llply%22+user%3Acran+language%3AR&ref=searchresults&type=Code).
+
+Another example that recently came up on r-package-devel:
+
+How to see lots of examples of roxygen templates?
+
+This search finds >1400 examples of roxygen templates in the wild:
+
+[https://github.com/search?q=man-roxygen+in%3Apath&type=Code&ref=searchresults](https://github.com/search?q=man-roxygen+in%3Apath&type=Code&ref=searchresults)
